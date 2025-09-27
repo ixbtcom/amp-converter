@@ -79,7 +79,11 @@ class Converter
         'ontoggle' => '*',
         'oncopy' => '*',
         'onpaste' => '*',
-        'oncut' => '*'
+        'oncut' => '*',
+        'paraeid' => '*',
+        'paraid' => '*',
+        'lang' => '*',
+        'xml:lang' => '*'
     ];
 
     private $converters = [
@@ -114,17 +118,17 @@ class Converter
     public function loadDefaultConverters()
     {
         $built_in_converters = [
-            new \magyarandras\AMPConverter\TagConverter\AMPImg($this->base_url, $this->image_timeout),
+            new \magyarandras\AMPConverter\TagConverter\AMPImgLightbox($this->base_url, $this->image_timeout),
             new \magyarandras\AMPConverter\TagConverter\AMPYoutube,
             new \magyarandras\AMPConverter\TagConverter\AMPVideo,
-            new \magyarandras\AMPConverter\TagConverter\AMPAudio,
+            //new \magyarandras\AMPConverter\TagConverter\AMPAudio,
             new \magyarandras\AMPConverter\TagConverter\AMPVimeo,
             new \magyarandras\AMPConverter\TagConverter\AMPFacebook,
             new \magyarandras\AMPConverter\TagConverter\AMPPinterest,
-            new \magyarandras\AMPConverter\TagConverter\AMPPlaybuzz,
+            //new \magyarandras\AMPConverter\TagConverter\AMPPlaybuzz,
             new \magyarandras\AMPConverter\TagConverter\AMPImgur,
-            new \magyarandras\AMPConverter\TagConverter\AMPDailymotion,
-            new \magyarandras\AMPConverter\TagConverter\AMPGfycat,
+            //new \magyarandras\AMPConverter\TagConverter\AMPDailymotion,
+            //new \magyarandras\AMPConverter\TagConverter\AMPGfycat,
             new \magyarandras\AMPConverter\TagConverter\AMPGist,
             new \magyarandras\AMPConverter\TagConverter\AMPTwitter,
             new \magyarandras\AMPConverter\TagConverter\AMPInstagram,
