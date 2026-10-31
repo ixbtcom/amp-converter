@@ -21,6 +21,6 @@
         "fasterimage/fasterimage": "^1.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.3 || ^8.3"
+        "phpspec/phpspec": "^8.3"
     }
 }
