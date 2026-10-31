@@ -58,7 +58,7 @@ tests:
   timeout: 15m
   parallel:
     matrix:
-      - PHP_RUNTIME: ["7.3", "7.4", "8.0", "8.1", "8.2"]
+      - PHP_RUNTIME: ["7.3", "7.4", "8.0", "8.1", "8.2", "8.4", "8.5"]
   cache:
     key: composer-$CI_JOB_NAME_SLUG
     paths:
@@ -67,9 +67,17 @@ tests:
     - mkdir -p "$COMPOSER_HOME"
     - chmod 0700 "$COMPOSER_HOME"
     - php --version
-    - composer --version
+    - |
+      curl --fail --silent --show-error --location https://getcomposer.org/download/2.11.1/composer.phar --output .ci-composer.phar
+      printf '%s  %s\n' '6f1b891e1d4927d62740276c540fb490e47689e19e102c49e8da849794882f8c' '.ci-composer.phar' | sha256sum --check --status
+      php .ci-composer.phar --version --no-ansi
     - test "$(php -r 'echo PHP_MAJOR_VERSION.".".PHP_MINOR_VERSION;')" = "$PHP_RUNTIME"
     - php -r 'foreach (["ctype","dom","libxml","mbstring"] as $extension) { if (!extension_loaded($extension)) { fwrite(STDERR, "Missing PHP extension ".$extension."\n"); exit(1); } }'
   script:
-    - composer install --prefer-source --no-interaction --no-progress
+    - php .ci-composer.phar install --prefer-source --no-interaction --no-progress
+    - php .ci-composer.phar audit --format=json > composer-audit.json
     - vendor/bin/phpspec run -v --format=progress
+  artifacts:
+    when: always
+    paths:
+      - composer-audit.json
