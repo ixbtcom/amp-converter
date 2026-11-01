@@ -8,6 +8,15 @@ A library to convert HTML articles, blog posts or similar content to [AMP (Accel
 
 ## Installation:
 
+This fork is maintained in [GitLab](https://glab.ixbt.site/packages/amp-converter) on branch `master`.
+To select it instead of the upstream package, configure this VCS repository in the consuming
+application (GitLab access is required); the Composer package name remains `magyarandras/amp-converter`:
+
+```bash
+composer config repositories.amp-converter vcs https://glab.ixbt.site/packages/amp-converter.git
+composer require magyarandras/amp-converter:dev-master
+```
+
 ```
 composer require magyarandras/amp-converter
 ```
